@@ -22,6 +22,7 @@ import io.airlift.airline.Option;
 
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
 import org.openapitools.codegen.utils.ModelUtils;
 
@@ -39,11 +40,15 @@ public class Validate implements Runnable {
     @Option(name = { "--recommend"}, title = "recommend spec improvements")
     private Boolean recommend;
 
+    @Option(name = { "--basePath" }, title = "spec base path for refs")
+    private String basePath;
+
     @Override
     public void run() {
         System.out.println("Validating spec (" + spec + ")");
-
-        SwaggerParseResult result = new OpenAPIParser().readLocation(spec, null, null);
+        ParseOptions options = new ParseOptions();
+        options.setBasePath(basePath);
+        SwaggerParseResult result = new OpenAPIParser().readLocation(spec, null, options);
         List<String> messageList = result.getMessages();
         Set<String> errors = new HashSet<String>(messageList);
         Set<String> warnings = new HashSet<String>();

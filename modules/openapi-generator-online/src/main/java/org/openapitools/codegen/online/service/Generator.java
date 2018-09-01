@@ -94,6 +94,7 @@ public class Generator {
         }
         OpenAPI openapi;
         ParseOptions parseOptions = new ParseOptions();
+        parseOptions.setBasePath(opts.getBasePath());
         parseOptions.setResolve(true);
         if (node == null) {
             if (opts.getOpenAPIUrl() != null) {

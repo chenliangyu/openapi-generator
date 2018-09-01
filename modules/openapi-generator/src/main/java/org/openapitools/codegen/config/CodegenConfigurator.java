@@ -108,6 +108,7 @@ public class CodegenConfigurator implements Serializable {
     private String artifactVersion;
     private String library;
     private String ignoreFileOverride;
+    private String basePath;
     private Map<String, String> systemProperties = new HashMap<String, String>();
     private Map<String, String> instantiationTypes = new HashMap<String, String>();
     private Map<String, String> typeMappings = new HashMap<String, String>();
@@ -488,6 +489,15 @@ public class CodegenConfigurator implements Serializable {
         return this;
     }
 
+    public String getBasePath() {
+        return basePath;
+    }
+
+    public CodegenConfigurator setBasePath(final String basePath) {
+        this.basePath = basePath;
+        return this;
+    }
+
     public ClientOptInput toClientOptInput() {
 
         Validate.notEmpty(generatorName, "language/generatorName must be specified");
@@ -539,6 +549,7 @@ public class CodegenConfigurator implements Serializable {
         ParseOptions options = new ParseOptions();
         options.setResolve(true);
         options.setFlatten(true);
+        options.setBasePath(getBasePath());
         SwaggerParseResult result = new OpenAPIParser().readLocation(inputSpec, authorizationValues, options);
 
         Set<String> validationMessages = new HashSet<>(result.getMessages());

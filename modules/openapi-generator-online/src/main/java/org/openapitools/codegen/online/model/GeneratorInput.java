@@ -30,6 +30,7 @@ public class GeneratorInput {
     private String openAPIUrl;
     private SecuritySchemeDefinition auth;
     private AuthorizationValue authorizationValue;
+    private String basePath;
 
     public AuthorizationValue getAuthorizationValue() {
         return authorizationValue;
@@ -62,6 +63,14 @@ public class GeneratorInput {
 
     public void setOpenAPIUrl(String url) {
         this.openAPIUrl = url;
+    }
+
+    public String getBasePath(){
+        return basePath;
+    }
+
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
     }
 
     @Deprecated

@@ -204,7 +204,7 @@
             <version>${swagger-core-version}</version>
         </dependency>
         <dependency> 
-            <groupId>org.openapitools.swagger.parser</groupId>
+            <groupId>com.binavid.swagger.parser</groupId>
             <artifactId>swagger-parser</artifactId>
             <version>${swagger-parser-version}</version>
         </dependency> 

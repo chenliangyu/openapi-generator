@@ -208,6 +208,12 @@ public class Generate implements Runnable {
                     + " Useful for piping the JSON output of debug options (e.g. `-DdebugOperations`) to an external parser directly while testing a generator.")
     private Boolean logToStderr;
 
+    @Option(name = {"-b, --basePath"},
+            title = "Base path for Refs",
+            description = "set base path for refs."
+                    + " Useful for to find external refs")
+    private String basePath;
+
     @Override
     public void run() {
         if (logToStderr != null) {
@@ -323,6 +329,10 @@ public class Generate implements Runnable {
 
         if (isNotEmpty(ignoreFileOverride)) {
             configurator.setIgnoreFileOverride(ignoreFileOverride);
+        }
+
+        if (isNotEmpty(basePath)) {
+            configurator.setBasePath(basePath);
         }
 
         if (removeOperationIdPrefix != null) {
